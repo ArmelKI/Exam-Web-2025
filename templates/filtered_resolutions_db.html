@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtrer les résolutions</title>
+</head>
+<body>
+    <h1>Mes Résolutions (Filtres)</h1>
+
+    <form action="{{ url_for('filtered_resolutions_from_db') }}" method="get">
+        <label for="filter-select">Afficher : </label>
+        
+        <select name="filter" id="filter-select">
+            
+            <option value="all" 
+                {% if request.args.get('filter') == 'all' or not request.args.get('filter') %}selected{% endif %}>
+                Toutes
+            </option>
+            
+            <option value="tenues" 
+                {% if request.args.get('filter') == 'tenues' %}selected{% endif %}>
+                Déjà tenues
+            </option>
+            
+            <option value="atenir" 
+                {% if request.args.get('filter') == 'atenir' %}selected{% endif %}>
+                À tenir
+            </option>
+        </select>
+
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <hr>
+
+    <ul>
+        {% for res in resolutions %}
+            <li>
+                <a href="{{ url_for('resolution_from_db', res_id=res[0]) }}">
+                    {{ res[0] }}. {{ res[1] }}
+                </a>
+
+                {% if res[4] %} 
+                    <span style="color: green;">(Fait)</span>
+                {% else %} 
+                    <span style="color: orange;">(À faire)</span>
+                {% endif %}
+            </li>
+        {% else %}
+            <li>Aucune résolution ne correspond à ce filtre.</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="{{ url_for('index') }}">Retour au menu</a>
+</body>
+</html>
