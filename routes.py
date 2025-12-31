@@ -53,3 +53,11 @@ def resolution_by_id(res_id):
         if res[0]==res_id:
             return f"{res[1]} : {res[2]}"
     return "Aucune bonne résolution ne correspond à cet intitulé"
+    
+@app.route('/resolution/<int:res_id>')
+def resolution(res_id):
+    for res in resolutions:
+        if res[0]==res_id:
+            return render_template('resolution.html', resolution=res)
+    
+    return "Résolution non trouvée" 
