@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from app import app 
 
 resolutions = [
@@ -68,4 +68,17 @@ def all_resolutions():
 
 @app.route('/add_resolution', methods=['GET', 'POST'])
 def add_resolution():
+    if request.method=='POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        image_name = request.form.get ('illustration')
+
+        existing_ids=[res[0] for res in resolutions]
+        new_id= max(existing_ids)+1 if existing_ids else 1
+        image_path = f"images/{image_name}" if image_name else None
+        new_resolution = (new_id, title, description, image_path, False )
+
+        resolutions.append(new_resolution)
+        return redirect(url_for('resolution', res_id = new_id))
+    
     return render_template('add_resolution.html')
