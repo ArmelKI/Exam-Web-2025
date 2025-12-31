@@ -75,6 +75,13 @@ def resolution_from_db(res_id):
 def all_resolutions():
     return render_template('all_resolutions.html', resolutions = resolutions)
 
+@app.route('/all_resolutions_from_db')
+def all_resolutions_from_db():
+    conn = get_db_connection()
+    resolutions_db = conn.execute('SELECT * FROM Resolutions').fetchall()
+    conn.close()
+    return render_template('all_resolutions_from_db.html', resolutions=resolutions_db)
+
 @app.route('/add_resolution', methods=['GET', 'POST'])
 def add_resolution():
     if request.method=='POST':
