@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Examen</title>
+</head>
+<body>
+    <h1>Menu de l'Examen</h1>
+    <ul>
+        <li><a href="{{ url_for('new_year') }}">Question 1 : Bonne année</a></li>
+        
+        <li><a href="{{ url_for('all_resolutions') }}">Question 4 : Liste (Python)</a></li>
+        
+        <li><a href="{{ url_for('add_resolution') }}">Question 5/6 : Ajouter (Python)</a></li>
+        
+        <li><a href="{{ url_for('all_resolutions_from_db') }}">Question 8 : Liste (DB)</a></li>
+        
+        </ul>
+</body>
+</html>
