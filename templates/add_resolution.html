@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une résolution</title>
+</head>
+<body>
+    <h1>Ajouter une résolution</h1>
+    
+    <form action="{{ url_for('add_resolution') }}" method="post">
+        <ul>
+            <li>
+                <label for="title">Titre</label>
+                <input type="text" id="title" name="title" required>
+            </li>
+            <li>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" required>
+            </li>
+            <li>
+                <label for="illustration">Illustration</label>
+                <input type="text" id="illustration" name="illustration" placeholder="ex: travel.jpg">
+            </li>
+        </ul>
+        <div class="button">
+            <button type="submit">Ajouter la résolution</button>
+        </div>
+    </form>
+    
+    <a href="{{ url_for('index') }}">Annuler</a>
+</body>
+</html>
