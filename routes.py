@@ -118,3 +118,22 @@ def add_resolution_to_db():
         conn.close()
         return redirect(url_for('resolution_from_db', res_id=new_id))
     return render_template('add_resolution_db.html')
+
+@app.route('/filtered_resolutions_from_db')
+def filtered_resolutions_from_db():
+    conn = get_db_connection()
+    
+    filter_value = request.args.get('filter')
+    if filter_value == 'tenues':
+        # On cherche celles où Achieved vaut 1
+        resolutions = conn.execute('SELECT * FROM Resolutions WHERE Achieved = 1').fetchall()
+    elif filter_value == 'atenir':
+        # On cherche celles où Achieved vaut 0 
+        resolutions = conn.execute('SELECT * FROM Resolutions WHERE Achieved = 0').fetchall()
+        
+    else:
+        # Par défaut (ou si on clique sur "Toutes"), on prend tout
+        resolutions = conn.execute('SELECT * FROM Resolutions').fetchall()
+    conn.close()
+    
+    return render_template('filtered_resolutions_db.html', resolutions=resolutions)
