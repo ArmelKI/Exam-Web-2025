@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All resolution from db</title>
+</head>
+<body>
+    <h1>All resolutions from db</h1>
+    <ul>
+        {% for res in resolutions %}
+        <ol>
+            <a href="{{ url_for('resolution_from_db', res_id = res[0])}}">{{ res[0] }}. {{ res[1] }}</a>
+        </ol>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
