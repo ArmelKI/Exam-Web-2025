@@ -98,3 +98,23 @@ def add_resolution():
         return redirect(url_for('resolution', res_id = new_id))
     
     return render_template('add_resolution.html')
+
+@app.route('/add_resolution_to_db', methods=['GET', 'POST'])
+def add_resolution_to_db():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        title = request.form.get('title')
+        description = request.form.get('description')
+        image_name = request.form.get('illustration')
+        image_path = f"images/{image_name}" if image_name else None
+
+        cursor = conn.execute(
+            'INSERT INTO Resolutions (Title, Description, ImagePath, Achieved) VALUES (?, ?, ?, ?)',
+            (title, description, image_path, False)
+        )
+        
+        conn.commit()
+        new_id = cursor.lastrowid #Recupérer l'id généré
+        conn.close()
+        return redirect(url_for('resolution_from_db', res_id=new_id))
+    return render_template('add_resolution_db.html')
