@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, request
-from app import app 
+from app import app, get_db_connection
 
 resolutions = [
     (
@@ -59,8 +59,17 @@ def resolution(res_id):
     for res in resolutions:
         if res[0]==res_id:
             return render_template('resolution.html', resolution=res)
-    
     return "Résolution non trouvée" 
+        
+@app.route('/resolution_from_db/<int:res_id>')
+def resolution_from_db(res_id):
+    conn = get_db_connection()
+    resolution = conn.execute('SELECT * FROM Resolutions WHERE Id = ?', (res_id,)).fetchone()
+    conn.close()
+    if resolution is None:
+        return "Résolution introuvable dans la base de données", 404
+    return render_template('resolution.html', resolution=resolution)
+
 
 @app.route('/all_resolutions')
 def all_resolutions():
