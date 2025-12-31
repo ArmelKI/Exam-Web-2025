@@ -61,3 +61,11 @@ def resolution(res_id):
             return render_template('resolution.html', resolution=res)
     
     return "Résolution non trouvée" 
+
+@app.route('/all_resolutions')
+def all_resolutions():
+    return render_template('all_resolutions.html', resolutions = resolutions)
+
+@app.route('/add_resolution', methods=['GET', 'POST'])
+def add_resolution():
+    return render_template('add_resolution.html')
