@@ -2,19 +2,57 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Menu Examen</title>
+    <title>Menu Examen Web 2025</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+        h1 { color: #333; text-align: center; }
+        h2 { color: #666; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 20px;}
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 10px 0; }
+        a { text-decoration: none; background: #f4f4f4; display: block; padding: 10px; border-radius: 5px; color: #007bff; }
+        a:hover { background: #e2e6ea; color: #0056b3; }
+    </style>
 </head>
 <body>
     <h1>Menu de l'Examen</h1>
+
+    <h2>Partie 1 : Python & Listes</h2>
     <ul>
-        <li><a href="{{ url_for('new_year') }}">Question 1 : Bonne année</a></li>
-        
-        <li><a href="{{ url_for('all_resolutions') }}">Question 4 : Liste (Python)</a></li>
-        
-        <li><a href="{{ url_for('add_resolution') }}">Question 5/6 : Ajouter (Python)</a></li>
-        
-        <li><a href="{{ url_for('all_resolutions_from_db') }}">Question 8 : Liste (DB)</a></li>
-        
-        </ul>
+        <li>
+            <a href="{{ url_for('new_year') }}">
+                Question 1 : Message de Bonne Année
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('all_resolutions') }}">
+                Question 4 : Voir la liste (Statique)
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('add_resolution') }}">
+                Question 5 & 6 : Ajouter une résolution (Statique)
+            </a>
+        </li>
+    </ul>
+
+    <h2>Partie 2 : Base de Données</h2>
+    <ul>
+        <li>
+            <a href="{{ url_for('all_resolutions_from_db') }}">
+                Question 8 : Voir la liste (Depuis la DB)
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('add_resolution_to_db') }}">
+                Question 9 : Ajouter une résolution (Dans la DB)
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('filtered_resolutions_from_db') }}">
+                Question 10 : Liste avec Filtres
+            </a>
+        </li>
+    </ul>
+
 </body>
 </html>
